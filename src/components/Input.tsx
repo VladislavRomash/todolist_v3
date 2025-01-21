@@ -5,7 +5,8 @@ export const Input = (): JSX.Element => {
     return (
         <div>
             <input/>
-            <Button title={'+'}/>
+            <Button title={'+'} clickHandler={() => {
+            }}/>
         </div>
     );
 };

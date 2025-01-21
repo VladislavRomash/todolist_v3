@@ -7,13 +7,16 @@ function App(): JSX.Element {
 
     const [tasks, setTasks] = useState<Task[]>([
         {id: crypto.randomUUID(), title: 'HTML', isDone: true},
-        {id: crypto.randomUUID(), title: 'JS', isDone: true},
+        {id: crypto.randomUUID(), title: 'JS', isDone: false},
         {id: crypto.randomUUID(), title: 'React', isDone: true},
     ]);
 
+    const removeTask = (taskID: string) => setTasks(tasks.filter(f => f.id !== taskID));
+
     return (
         <div className="app">
-            <Todolist tasks={tasks}/>
+            <Todolist tasks={tasks}
+                      removeTask={removeTask}/>
         </div>
     )
 }

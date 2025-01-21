@@ -7,18 +7,22 @@ import {Task} from '../types/Task.ts';
 
 type Props = {
     tasks: Task[]
+    removeTask: (taskID: string) => void
 }
 
-export const Todolist = ({tasks}: Props): JSX.Element => {
+export const Todolist = ({tasks, removeTask}: Props): JSX.Element => {
     return (
         <div>
             <Title title={'What to learn'}/>
             <Input/>
-            <Tasks tasks={tasks}/>
+            <Tasks tasks={tasks} removeTask={removeTask}/>
             <div>
-                <Button title={'All'}/>
-                <Button title={'Active'}/>
-                <Button title={'Completed'}/>
+                <Button title={'All'} clickHandler={() => {
+                }}/>
+                <Button title={'Active'} clickHandler={() => {
+                }}/>
+                <Button title={'Completed'} clickHandler={() => {
+                }}/>
             </div>
         </div>
     );
