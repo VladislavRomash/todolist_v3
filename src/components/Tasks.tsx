@@ -1,17 +1,23 @@
 import {JSX} from 'react';
+import {Task} from '../types/Task.ts';
 
-export const Tasks = (): JSX.Element => {
+type Props = {
+    tasks: Task[];
+}
+
+export const Tasks = ({tasks}: Props): JSX.Element => {
+
+    const task: JSX.Element[] = tasks.map(m => {
+        return (
+            <li key={m.id}>
+                <input type="checkbox" checked={m.isDone}/> <span>{m.title}</span>
+            </li>
+        )
+    })
+
     return (
         <ul>
-            <li>
-                <input type="checkbox" checked={true}/> <span>HTML&CSS</span>
-            </li>
-            <li>
-                <input type="checkbox" checked={true}/> <span>JS</span>
-            </li>
-            <li>
-                <input type="checkbox" checked={false}/> <span>React</span>
-            </li>
+            {task}
         </ul>
     );
 };
