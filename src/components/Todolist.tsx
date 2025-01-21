@@ -9,16 +9,16 @@ import {Filter} from '../types/Filter.ts';
 type Props = {
     tasks: Task[]
     removeTask: (taskID: string) => void
+    createTask: (title: string) => void
 }
 
-export const Todolist = ({tasks, removeTask}: Props): JSX.Element => {
+export const Todolist = ({tasks, removeTask, createTask}: Props): JSX.Element => {
 
     const [filter, setFilter] = useState<Filter>('all')
 
     const getFilterValue = (filterValue: Filter) => {
         setFilter(filterValue)
     }
-
     const filteringTasks = () => {
         switch (filter) {
             case 'active':
@@ -29,13 +29,15 @@ export const Todolist = ({tasks, removeTask}: Props): JSX.Element => {
                 return tasks
         }
     }
-
     const filteredTasks = filteringTasks()
+    const inputHandler = (title: string) => {
+        createTask(title)
+    }
 
     return (
         <div>
             <Title title={'What to learn'}/>
-            <Input/>
+            <Input inputHandler={inputHandler}/>
             <Tasks tasks={filteredTasks}
                    removeTask={removeTask}/>
             <div>

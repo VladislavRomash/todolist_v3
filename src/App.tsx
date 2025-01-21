@@ -13,10 +13,16 @@ function App(): JSX.Element {
 
     const removeTask = (taskID: string) => setTasks(tasks.filter(f => f.id !== taskID));
 
+    const createTask = (title: string) => {
+        const newTask: Task = {id: crypto.randomUUID(), title, isDone: false}
+        setTasks([newTask, ...tasks])
+    }
+
     return (
         <div className="app">
             <Todolist tasks={tasks}
-                      removeTask={removeTask}/>
+                      removeTask={removeTask}
+                      createTask={createTask}/>
         </div>
     )
 }
