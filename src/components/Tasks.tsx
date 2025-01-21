@@ -23,8 +23,8 @@ export const Tasks = ({tasks, removeTask}: Props): JSX.Element => {
     })
 
     return (
-        <ul>
-            {task}
-        </ul>
+        <div>
+            {tasks.length ? <ul>{task}</ul> : 'Tasks list is empty'}
+        </div>
     );
 };

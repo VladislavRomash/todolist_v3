@@ -1,9 +1,10 @@
 import {Tasks} from './Tasks.tsx';
-import {JSX} from 'react';
+import {JSX, useState} from 'react';
 import {Title} from './Title.tsx';
 import {Input} from './Input.tsx';
 import {Button} from './Button.tsx';
 import {Task} from '../types/Task.ts';
+import {Filter} from '../types/Filter.ts';
 
 type Props = {
     tasks: Task[]
@@ -11,18 +12,36 @@ type Props = {
 }
 
 export const Todolist = ({tasks, removeTask}: Props): JSX.Element => {
+
+    const [filter, setFilter] = useState<Filter>('all')
+
+    const getFilterValue = (filterValue: Filter) => {
+        setFilter(filterValue)
+    }
+
+    const filteringTasks = () => {
+        switch (filter) {
+            case 'active':
+                return tasks.filter(f => !f.isDone)
+            case 'completed':
+                return tasks.filter(f => f.isDone)
+            default:
+                return tasks
+        }
+    }
+
+    const filteredTasks = filteringTasks()
+
     return (
         <div>
             <Title title={'What to learn'}/>
             <Input/>
-            <Tasks tasks={tasks} removeTask={removeTask}/>
+            <Tasks tasks={filteredTasks}
+                   removeTask={removeTask}/>
             <div>
-                <Button title={'All'} clickHandler={() => {
-                }}/>
-                <Button title={'Active'} clickHandler={() => {
-                }}/>
-                <Button title={'Completed'} clickHandler={() => {
-                }}/>
+                <Button title={'All'} clickHandler={() => getFilterValue('all')}/>
+                <Button title={'Active'} clickHandler={() => getFilterValue('active')}/>
+                <Button title={'Completed'} clickHandler={() => getFilterValue('completed')}/>
             </div>
         </div>
     );
