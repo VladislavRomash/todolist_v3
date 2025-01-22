@@ -17,9 +17,8 @@ export const Todolist = ({tasks, removeTask, createTask, changeStatus}: Props): 
 
     const [filter, setFilter] = useState<Filter>('all')
 
-    const getFilterValue = (filterValue: Filter) => {
-        setFilter(filterValue)
-    }
+    const getFilterValue = (filterValue: Filter) => setFilter(filterValue)
+
     const filteringTasks = () => {
         switch (filter) {
             case 'active':
@@ -30,10 +29,11 @@ export const Todolist = ({tasks, removeTask, createTask, changeStatus}: Props): 
                 return tasks
         }
     }
+
     const filteredTasks = filteringTasks()
-    const inputHandler = (title: string) => {
-        createTask(title)
-    }
+
+    const inputHandler = (title: string) => createTask(title)
+
 
     return (
         <div>

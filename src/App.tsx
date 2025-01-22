@@ -11,15 +11,17 @@ function App(): JSX.Element {
         {id: crypto.randomUUID(), title: 'React', isDone: true},
     ]);
 
-    const removeTask = (taskID: string) => setTasks(tasks.filter(f => f.id !== taskID));
+    const removeTask = (taskID: string) =>
+        setTasks(tasks.filter(f => f.id !== taskID))
+
     const createTask = (title: string) => {
         const newTask: Task = {id: crypto.randomUUID(), title, isDone: false}
         setTasks([newTask, ...tasks])
     }
-    const changeStatus = (taskID: string, status: boolean) => {
-        console.log(taskID, status)
-        setTasks(tasks.map(m => m.id === taskID ? {...m, isDone: status} : m));
-    }
+
+    const changeStatus = (taskID: string, status: boolean) =>
+        setTasks(tasks.map(m => m.id === taskID ? {...m, isDone: status} : m))
+
 
     return (
         <div className="app">

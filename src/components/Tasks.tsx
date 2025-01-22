@@ -14,9 +14,9 @@ export const Tasks = ({tasks, removeTask, changeStatus}: Props): JSX.Element => 
 
         const delTask = () => removeTask(m.id)
 
-        const changeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const changeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) =>
             changeStatus(m.id, e.currentTarget.checked)
-        }
+
 
         return (
             <li key={m.id}>
