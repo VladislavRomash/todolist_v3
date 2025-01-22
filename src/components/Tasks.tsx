@@ -1,6 +1,7 @@
 import {ChangeEvent, JSX} from 'react';
 import {Task} from '../types/Task.ts';
 import {Button} from './Button.tsx';
+import {useAutoAnimate} from '@formkit/auto-animate/react';
 
 type Props = {
     tasks: Task[]
@@ -10,13 +11,14 @@ type Props = {
 
 export const Tasks = ({tasks, removeTask, changeStatus}: Props): JSX.Element => {
 
+    const [listRef] = useAutoAnimate<HTMLUListElement>()
+
     const task: JSX.Element[] = tasks.map(m => {
 
         const delTask = () => removeTask(m.id)
 
         const changeCheckboxHandler = (e: ChangeEvent<HTMLInputElement>) =>
             changeStatus(m.id, e.currentTarget.checked)
-
 
         return (
             <li key={m.id}>
@@ -31,7 +33,7 @@ export const Tasks = ({tasks, removeTask, changeStatus}: Props): JSX.Element => 
 
     return (
         <div>
-            {tasks.length ? <ul>{task}</ul> : 'Tasks list is empty'}
+            {tasks.length ? <ul ref={listRef}>{task}</ul> : 'Tasks list is empty'}
         </div>
     );
 };
