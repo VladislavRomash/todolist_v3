@@ -10,9 +10,10 @@ type Props = {
     tasks: Task[]
     removeTask: (taskID: string) => void
     createTask: (title: string) => void
+    changeStatus: (taskID: string, status: boolean) => void
 }
 
-export const Todolist = ({tasks, removeTask, createTask}: Props): JSX.Element => {
+export const Todolist = ({tasks, removeTask, createTask, changeStatus}: Props): JSX.Element => {
 
     const [filter, setFilter] = useState<Filter>('all')
 
@@ -39,7 +40,9 @@ export const Todolist = ({tasks, removeTask, createTask}: Props): JSX.Element =>
             <Title title={'What to learn'}/>
             <Input inputHandler={inputHandler}/>
             <Tasks tasks={filteredTasks}
-                   removeTask={removeTask}/>
+                   removeTask={removeTask}
+                   changeStatus={changeStatus}
+            />
             <div>
                 <Button title={'All'} clickHandler={() => getFilterValue('all')}/>
                 <Button title={'Active'} clickHandler={() => getFilterValue('active')}/>

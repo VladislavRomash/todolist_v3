@@ -12,17 +12,21 @@ function App(): JSX.Element {
     ]);
 
     const removeTask = (taskID: string) => setTasks(tasks.filter(f => f.id !== taskID));
-
     const createTask = (title: string) => {
         const newTask: Task = {id: crypto.randomUUID(), title, isDone: false}
         setTasks([newTask, ...tasks])
+    }
+    const changeStatus = (taskID: string, status: boolean) => {
+        console.log(taskID, status)
+        setTasks(tasks.map(m => m.id === taskID ? {...m, isDone: status} : m));
     }
 
     return (
         <div className="app">
             <Todolist tasks={tasks}
                       removeTask={removeTask}
-                      createTask={createTask}/>
+                      createTask={createTask}
+                      changeStatus={changeStatus}/>
         </div>
     )
 }
